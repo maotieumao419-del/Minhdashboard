@@ -40,9 +40,14 @@ export async function getMetricsForDateRange(startDate: string, endDate: string)
 
   orders?.forEach(order => {
     const raw = order.raw_data as any;
-    totalSales += Number(raw?.orderTotal?.amount || 0);
-    totalRefunds += Number(raw?.refunds || 0);
-    totalAmazonFees += Number(raw?.fees?.amount || 0);
+    // Hỗ trợ cả dữ liệu mẫu (orderTotal) và dữ liệu thật (OrderTotal)
+    const salesAmount = raw?.OrderTotal?.Amount || raw?.orderTotal?.amount || 0;
+    const refundsAmount = raw?.refunds || 0;
+    const feesAmount = raw?.fees?.amount || 0;
+
+    totalSales += Number(salesAmount);
+    totalRefunds += Number(refundsAmount);
+    totalAmazonFees += Number(feesAmount);
   });
 
   let totalAdSpend = 0;
@@ -117,7 +122,8 @@ export async function getChartData() {
       chartMap[dateStr] = { date: dateStr, sales: 0, profit: 0, adCost: 0 };
     }
     const raw = order.raw_data as any;
-    const sales = Number(raw?.orderTotal?.amount || 0);
+    const salesAmount = raw?.OrderTotal?.Amount || raw?.orderTotal?.amount || 0;
+    const sales = Number(salesAmount);
     const fees = Number(raw?.fees?.amount || 0);
     const refunds = Number(raw?.refunds || 0);
     
