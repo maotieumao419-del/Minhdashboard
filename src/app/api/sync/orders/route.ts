@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
-import SellingPartnerAPI from "amazon-sp-api";
+const SellingPartnerAPI = require("amazon-sp-api");
 
 export const dynamic = "force-dynamic";
 
