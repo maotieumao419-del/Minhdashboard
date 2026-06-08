@@ -102,7 +102,7 @@ export async function GET() {
     let downloadUrl = "";
     let attempts = 0;
 
-    while (reportStatus !== "SUCCESS" && attempts < 20) {
+    while (reportStatus !== "SUCCESS" && attempts < 60) {
       console.log(`Checking report status (Attempt ${attempts + 1})...`);
       await sleep(10000); // Đợi 10 giây
 
