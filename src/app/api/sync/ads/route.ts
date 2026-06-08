@@ -104,7 +104,7 @@ export async function GET() {
 
     while (reportStatus !== "SUCCESS" && attempts < 20) {
       console.log(`Checking report status (Attempt ${attempts + 1})...`);
-      await sleep(5000); // Đợi 5 giây
+      await sleep(10000); // Đợi 10 giây
 
       const statusRes = await axios.get(
         `https://advertising-api.amazon.com/reporting/reports/${reportId}`,
